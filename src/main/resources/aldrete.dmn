@@ -1,0 +1,656 @@
+<dmn:definitions xmlns:dmn="http://www.omg.org/spec/DMN/20180521/MODEL/" xmlns="https://kiegroup.org/dmn/_48AE25CF-692C-4CE4-A40D-454DCE293742" xmlns:feel="http://www.omg.org/spec/DMN/20180521/FEEL/" xmlns:kie="http://www.drools.org/kie/dmn/1.2" xmlns:dmndi="http://www.omg.org/spec/DMN/20180521/DMNDI/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="_F7C28128-9F8C-4958-B53E-F22A34B7CE33" name="aldrete" typeLanguage="http://www.omg.org/spec/DMN/20180521/FEEL/" namespace="https://kiegroup.org/dmn/_48AE25CF-692C-4CE4-A40D-454DCE293742">
+  <dmn:extensionElements/>
+  <dmn:itemDefinition id="_212660CD-8A68-40A8-BBBC-99931E396AEE" name="tRespiration" isCollection="false">
+    <dmn:typeRef>string</dmn:typeRef>
+    <dmn:allowedValues kie:constraintType="enumeration" id="_C6756C5A-A8DE-4546-8B16-EDDFF8C0B378">
+      <dmn:text>"Able to take deep breath and cough", "Dyspnea/shallow breathing", "Apnea"</dmn:text>
+    </dmn:allowedValues>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_83C31FC9-CDD2-4AEA-9E2B-5EB5D6E8316B" name="tSpO2" isCollection="false">
+    <dmn:typeRef>string</dmn:typeRef>
+    <dmn:allowedValues kie:constraintType="enumeration" id="_28163FB5-3CEA-40F8-BEA1-5826BBF6B578">
+      <dmn:text>"Maintains &gt;92% on room air", "Needs O2 inhalation to maintain O2 saturation &gt;90%", "O2 saturation &lt;90% even with supplemental oxygen"</dmn:text>
+    </dmn:allowedValues>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_AC52C521-23F3-4B11-8F61-2246563C8A79" name="tConsciousness" isCollection="false">
+    <dmn:typeRef>string</dmn:typeRef>
+    <dmn:allowedValues kie:constraintType="enumeration" id="_8404BF67-7F32-4B95-BFC0-97101A4BE018">
+      <dmn:text>"Fully awake", "Arousable on calling", "Not responding"</dmn:text>
+    </dmn:allowedValues>
+  </dmn:itemDefinition>
+  <dmn:inputData id="_4F206DEE-056A-4486-9F2E-F4C77EDB09ED" name="Respiration">
+    <dmn:extensionElements/>
+    <dmn:variable id="_BCE6F3A2-DE13-4D0D-9585-8FBB6B4FA497" name="Respiration" typeRef="tRespiration"/>
+  </dmn:inputData>
+  <dmn:inputData id="_422BC0C3-0406-4195-B692-7F1EE86A3763" name="O2 Saturation">
+    <dmn:extensionElements/>
+    <dmn:variable id="_2B5C17D8-67DB-410B-AA75-A2F186A0C6BF" name="O2 Saturation" typeRef="tSpO2"/>
+  </dmn:inputData>
+  <dmn:inputData id="_84C35E7A-11DD-4EA3-99E7-258B7295EAFD" name="Consciousness">
+    <dmn:extensionElements/>
+    <dmn:variable id="_9AD443F7-03A1-4F3C-9063-1FFBA3A72BEE" name="Consciousness" typeRef="tConsciousness"/>
+  </dmn:inputData>
+  <dmn:inputData id="_B46F561A-C802-4AA2-8ECA-0FE93F70D2E6" name="BP mm Hg compared to reference">
+    <dmn:extensionElements/>
+    <dmn:variable id="_41C893F0-D5CF-458D-86B5-474D33D179C4" name="BP mm Hg compared to reference" typeRef="number"/>
+  </dmn:inputData>
+  <dmn:inputData id="_D9E423E0-D55E-4696-B9A8-2B1C05710167" name="Extremities able to move">
+    <dmn:extensionElements/>
+    <dmn:variable id="_37FEBE3C-A1C9-44B0-A00F-7895A35EAF9B" name="Extremities able to move" typeRef="number"/>
+  </dmn:inputData>
+  <dmn:decision id="_B23186D1-DA14-4519-80D4-C382273BF6FE" name="Respiration score">
+    <dmn:extensionElements/>
+    <dmn:variable id="_602D6E5B-EACC-4B2A-8C31-CFF812E8763B" name="Respiration score" typeRef="number"/>
+    <dmn:informationRequirement id="_645EA807-77DE-4469-95B8-F01608E13E0F">
+      <dmn:requiredInput href="#_4F206DEE-056A-4486-9F2E-F4C77EDB09ED"/>
+    </dmn:informationRequirement>
+    <dmn:decisionTable id="_1FB87007-8D27-4458-AEA8-F55FE7E4ABD2" hitPolicy="UNIQUE" preferredOrientation="Rule-as-Row">
+      <dmn:input id="_8F790B1F-5AD2-4DC5-97BB-05A2FDF256CC">
+        <dmn:inputExpression id="_71BB5821-4DE0-4EEF-80B3-F476F23DEA0F" typeRef="string">
+          <dmn:text>Respiration</dmn:text>
+        </dmn:inputExpression>
+        <dmn:inputValues id="_F7B8B8BD-6372-4088-B5DC-F7FFC5A2D0FD">
+          <dmn:text>"Able to take deep breath and cough", "Dyspnea/shallow breathing", "Apnea"</dmn:text>
+        </dmn:inputValues>
+      </dmn:input>
+      <dmn:output id="_18F6770A-7252-4152-9445-A9250D578515"/>
+      <dmn:annotation name="annotation-1"/>
+      <dmn:rule id="_548746C1-B8D1-4BA1-82F7-5C03ACE631EE">
+        <dmn:inputEntry id="_705E72BF-6242-493E-8C1B-7F0A4670211E">
+          <dmn:text>"Able to take deep breath and cough"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_9E64D608-DC55-4440-9CBD-2D3DC8F30A05">
+          <dmn:text>2</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_53DEBA62-52BF-4DAA-9DE6-26E862FEF357">
+        <dmn:inputEntry id="_A2F19289-1676-4067-889B-50B79B4A9D11">
+          <dmn:text>"Dyspnea/shallow breathing"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_6C436CF0-57D9-4CCB-B756-50FFF2B56CAD">
+          <dmn:text>1</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_F8917DBD-E1C3-4EB3-8891-F4E4148DE90F">
+        <dmn:inputEntry id="_3960CBB4-E233-446E-9BAB-79FA68AA1988">
+          <dmn:text>"Apnea"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_ACF86D3E-972A-4E84-8389-981C3AA5FC33">
+          <dmn:text>0</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+    </dmn:decisionTable>
+  </dmn:decision>
+  <dmn:decision id="_19B141E8-F645-4DC0-81CA-0030CA4658DC" name="O2 Saturation score">
+    <dmn:extensionElements/>
+    <dmn:variable id="_E6EB4907-223D-4ABC-8CB9-CC4B57FE7B8B" name="O2 Saturation score" typeRef="number"/>
+    <dmn:informationRequirement id="_01AB0EE1-C5D9-44C0-BC5C-A605AD2A0AD0">
+      <dmn:requiredInput href="#_422BC0C3-0406-4195-B692-7F1EE86A3763"/>
+    </dmn:informationRequirement>
+    <dmn:decisionTable id="_759EFEB2-0EBC-4E7C-8C3E-6DE4D3F4CA48" hitPolicy="UNIQUE" preferredOrientation="Rule-as-Row">
+      <dmn:input id="_5EE1963A-72AB-4774-A85A-E235FBA837DA">
+        <dmn:inputExpression id="_2DC6ACDE-E0BE-41FB-95BC-C559314F5855" typeRef="string">
+          <dmn:text>O2 Saturation</dmn:text>
+        </dmn:inputExpression>
+        <dmn:inputValues id="_CE924670-0D91-4281-918B-4D1C681A4CED">
+          <dmn:text>"Maintains &gt;92% on room air", "Needs O2 inhalation to maintain O2 saturation &gt;90%", "O2 saturation &lt;90% even with supplemental oxygen"</dmn:text>
+        </dmn:inputValues>
+      </dmn:input>
+      <dmn:output id="_D2BF1995-7902-43B0-BDC5-823048A55710"/>
+      <dmn:annotation name="annotation-1"/>
+      <dmn:rule id="_0F2234B6-3188-416E-83E3-EAFE57A26C40">
+        <dmn:inputEntry id="_20BB5AFF-0245-4ABF-ABF0-71101EB348FE">
+          <dmn:text>"Maintains &gt;92% on room air"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_21A29AAA-E491-4879-BBAF-2429970CFBF2">
+          <dmn:text>2</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_1C6B4262-64D1-466A-9F71-C33BBABF2430">
+        <dmn:inputEntry id="_B91C4D37-4328-4C6E-92A7-EA20CB00B669">
+          <dmn:text>"Needs O2 inhalation to maintain O2 saturation &gt;90%"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_6E9D1DA5-B2B2-453A-8AEB-C91CF88907B6">
+          <dmn:text>1</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_3A2BAF07-BFC2-4ECB-9FC9-938C74E3E7F1">
+        <dmn:inputEntry id="_4D4545AC-349C-4F37-9331-94458E3DCA1F">
+          <dmn:text>"O2 saturation &lt;90% even with supplemental oxygen"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_357BB69D-236F-4F47-9BAB-AFB00E48F22A">
+          <dmn:text>0</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+    </dmn:decisionTable>
+  </dmn:decision>
+  <dmn:decision id="_69EF4B20-07B1-4B8D-8BEE-951E4FE2375B" name="Consciousness score">
+    <dmn:extensionElements/>
+    <dmn:variable id="_E4E71B60-B42B-4449-B725-D9ECE202B06D" name="Consciousness score" typeRef="number"/>
+    <dmn:informationRequirement id="_1D73EE72-DFD8-427F-8183-F54E93608051">
+      <dmn:requiredInput href="#_84C35E7A-11DD-4EA3-99E7-258B7295EAFD"/>
+    </dmn:informationRequirement>
+    <dmn:decisionTable id="_2AE4B6A7-F95B-40AA-A7D9-591D3F8C4E7D" hitPolicy="UNIQUE" preferredOrientation="Rule-as-Row">
+      <dmn:input id="_DE82E977-5BA8-4805-8804-BD734C34CE26">
+        <dmn:inputExpression id="_51AF3038-C034-4E99-897C-3E9AEA0FA0A1" typeRef="string">
+          <dmn:text>Consciousness</dmn:text>
+        </dmn:inputExpression>
+        <dmn:inputValues id="_DA10FC8D-C220-4E18-9CA4-413D065186D2">
+          <dmn:text>"Fully awake", "Arousable on calling", "Not responding"</dmn:text>
+        </dmn:inputValues>
+      </dmn:input>
+      <dmn:output id="_7291FD47-48E2-4845-9BF9-5799DA7384FB"/>
+      <dmn:annotation name="annotation-1"/>
+      <dmn:rule id="_368335B3-7302-47BD-9BE7-928478D414E6">
+        <dmn:inputEntry id="_3BCD2AF5-57FA-49C1-8FD4-AB56BAC1A2C8">
+          <dmn:text>"Fully awake"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_C1DF4F31-D9D2-4B2C-8BE6-3D5C9B9DA3FF">
+          <dmn:text>2</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_63B576CD-CFBF-4609-BBE9-B9010061126D">
+        <dmn:inputEntry id="_E4CA2EC5-AD51-451D-AF63-E969E823CE07">
+          <dmn:text>"Arousable on calling"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_2C8A1415-1287-4526-BDF3-72DDAF11B90D">
+          <dmn:text>1</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_00855333-F1B4-4913-A53E-3BFEA40C48D5">
+        <dmn:inputEntry id="_7BBE5D78-6284-4C85-8B6D-2406AD461034">
+          <dmn:text>"Not responding"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_A17380C6-F660-4F0F-B872-4242CE38D1B7">
+          <dmn:text>0</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+    </dmn:decisionTable>
+  </dmn:decision>
+  <dmn:decision id="_3E9CD01E-57FE-44BE-B307-8E84F09A5E5D" name="Circulation score">
+    <dmn:extensionElements/>
+    <dmn:variable id="_4586E475-2182-4641-95F3-24A48C833867" name="Circulation score" typeRef="number"/>
+    <dmn:informationRequirement id="_464F79A8-4929-4BB1-BF2D-929316FD79D8">
+      <dmn:requiredInput href="#_B46F561A-C802-4AA2-8ECA-0FE93F70D2E6"/>
+    </dmn:informationRequirement>
+    <dmn:decisionTable id="_F2D88973-4776-4D8D-98AF-4A48A18EF8D6" hitPolicy="UNIQUE" preferredOrientation="Rule-as-Row">
+      <dmn:input id="_04900DE4-F4C3-4390-BD22-4F7542423075">
+        <dmn:inputExpression id="_9686C945-674F-4440-81AF-95906264BF16" typeRef="number">
+          <dmn:text>BP mm Hg compared to reference</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:output id="_56694548-993F-4810-9B61-7953EB3DC047"/>
+      <dmn:annotation name="annotation-1"/>
+      <dmn:rule id="_F2D6437D-6FF9-4CB4-8CB1-10DDC32C9311">
+        <dmn:inputEntry id="_246BBD54-FB03-47DD-9844-7B0AEAACA6EC">
+          <dmn:text>&lt;20</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_69C6615F-0B37-46C7-906E-59E40B8835AF">
+          <dmn:text>2</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_CF9F5E6A-DFFA-477D-9B9A-5E846F4CE45B">
+        <dmn:inputEntry id="_8F02EDF6-5E24-4886-B8EE-3AB41C2D6E14">
+          <dmn:text>[20..50]</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_B511BF42-2FD2-4179-8E90-F5ADFF1F9C91">
+          <dmn:text>1</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_2BFA7423-207D-4D94-BE90-8B44E48C0839">
+        <dmn:inputEntry id="_DFA92737-D0DE-462B-9D64-1041BE8E8CC2">
+          <dmn:text>&gt;50</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_CEDDB995-0FAF-49C3-8579-E6359411EA76">
+          <dmn:text>0</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+    </dmn:decisionTable>
+  </dmn:decision>
+  <dmn:decision id="_C636DA55-30D0-4B93-95F6-A1C7B241D41F" name="Activity score">
+    <dmn:extensionElements/>
+    <dmn:variable id="_4044AFD0-2F23-40AA-BA8D-AB5F08FCEBF6" name="Activity score" typeRef="number"/>
+    <dmn:informationRequirement id="_3A1BB33E-1F58-4323-8F4A-1A2F2A666289">
+      <dmn:requiredInput href="#_D9E423E0-D55E-4696-B9A8-2B1C05710167"/>
+    </dmn:informationRequirement>
+    <dmn:decisionTable id="_50BECB58-BE58-4C4C-90BC-BB963EE91FCA" hitPolicy="UNIQUE" preferredOrientation="Rule-as-Row">
+      <dmn:input id="_BECF7D7D-4F12-40B2-AAE2-B6456ADE85C6">
+        <dmn:inputExpression id="_8D12D68D-F7BC-493A-887D-2502A476C1ED" typeRef="number">
+          <dmn:text>Extremities able to move</dmn:text>
+        </dmn:inputExpression>
+        <dmn:inputValues kie:constraintType="expression" id="_443ACF71-D5B4-42F0-8371-1E49F3CCD7B2">
+          <dmn:text>0,1,2,3,4</dmn:text>
+        </dmn:inputValues>
+      </dmn:input>
+      <dmn:output id="_41FFE0B0-C282-43BD-9DDD-4EFD5364B6D8"/>
+      <dmn:annotation name="annotation-1"/>
+      <dmn:rule id="_C3FA88E7-5114-474B-9B8F-FF650799FBDB">
+        <dmn:inputEntry id="_CCA127F4-4544-407C-9B00-59FA26119332">
+          <dmn:text>4</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_1FE07F1D-7FB2-4250-8C36-38A6EE915A7B">
+          <dmn:text>2</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_8D37B69A-ADD0-4C0F-83B3-0EA5697E1704">
+        <dmn:inputEntry id="_6EA83673-0C4D-4DD9-952F-38A6A46FDB03">
+          <dmn:text>[2..3]</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_82DC529E-16D5-4832-B479-86779F29D17D">
+          <dmn:text>1</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_31039AE2-121A-427F-AAB0-485DC86C02CC">
+        <dmn:inputEntry id="_031544A1-2F1C-4502-9489-112335FC505C">
+          <dmn:text>[0..1]</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_134DD7FB-E4E1-4364-AF5D-6AF5B3DAFE08">
+          <dmn:text>0</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+    </dmn:decisionTable>
+  </dmn:decision>
+  <dmn:decision id="_BF3AAA83-248B-41A4-A2E3-1D7CD7E9B5E3" name="Aldrete score">
+    <dmn:extensionElements/>
+    <dmn:variable id="_5D392F11-2A11-4523-988B-BEBCC27C51EC" name="Aldrete score" typeRef="number"/>
+    <dmn:informationRequirement id="_9BB8ABF3-D8DB-4D93-9BEC-094108151309">
+      <dmn:requiredDecision href="#_B23186D1-DA14-4519-80D4-C382273BF6FE"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_F5E3668C-BCDE-4B9A-8703-C6936D427D14">
+      <dmn:requiredDecision href="#_19B141E8-F645-4DC0-81CA-0030CA4658DC"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_AA56CAC0-93A1-4D3E-8D8B-8F4F2BE5B59C">
+      <dmn:requiredDecision href="#_69EF4B20-07B1-4B8D-8BEE-951E4FE2375B"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_EAF3CF2F-7C83-4CC6-8E7D-CE48209DEB35">
+      <dmn:requiredDecision href="#_3E9CD01E-57FE-44BE-B307-8E84F09A5E5D"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_2E1EDDF7-5579-414F-BFE4-0D0FB3648808">
+      <dmn:requiredDecision href="#_C636DA55-30D0-4B93-95F6-A1C7B241D41F"/>
+    </dmn:informationRequirement>
+    <dmn:literalExpression id="_86B50A60-85E8-4DA7-8A0B-88A07C96687E">
+      <dmn:text>Respiration score+O2 Saturation score+Consciousness score+Circulation score+Activity score</dmn:text>
+    </dmn:literalExpression>
+  </dmn:decision>
+  <dmn:decision id="_C3C93AAF-9CC0-4A17-B0B0-09580095241C" name="Patient dimission">
+    <dmn:extensionElements/>
+    <dmn:variable id="_205435EE-064F-4B98-8296-C647B984F0BC" name="Patient dimission" typeRef="string"/>
+    <dmn:informationRequirement id="_9B92A37E-416F-4503-996A-E259049D3B1E">
+      <dmn:requiredDecision href="#_BF3AAA83-248B-41A4-A2E3-1D7CD7E9B5E3"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_8609BB13-3E49-4023-A7A9-96D662E34E87">
+      <dmn:requiredDecision href="#_B23186D1-DA14-4519-80D4-C382273BF6FE"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_6BD2C430-027E-466F-ADE9-ED536D0BB3AC">
+      <dmn:requiredDecision href="#_19B141E8-F645-4DC0-81CA-0030CA4658DC"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_98C34D26-0CE8-4AB0-B830-E7BE24DC7359">
+      <dmn:requiredDecision href="#_69EF4B20-07B1-4B8D-8BEE-951E4FE2375B"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_1BA86314-9E72-45ED-B11F-4B9651F20370">
+      <dmn:requiredDecision href="#_3E9CD01E-57FE-44BE-B307-8E84F09A5E5D"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_3A07DF86-C1D8-4D85-B7FC-F5171F3549CA">
+      <dmn:requiredDecision href="#_C636DA55-30D0-4B93-95F6-A1C7B241D41F"/>
+    </dmn:informationRequirement>
+    <dmn:decisionTable id="_B4E1ECBF-CB35-4BF9-B030-24ED947E77AD" hitPolicy="UNIQUE" preferredOrientation="Rule-as-Row">
+      <dmn:input id="_E2AD47D0-685F-4C3C-88F7-7FC3A0886682">
+        <dmn:inputExpression id="_6687A45A-8B92-47F0-9321-7A4D4AB62358" typeRef="number">
+          <dmn:text>Aldrete score</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:input id="_21B6E618-8057-4CBE-BFFC-53E12679A978">
+        <dmn:inputExpression id="_DF88E7A7-3057-424F-89ED-B072C9E1CCB0" typeRef="number">
+          <dmn:text>Activity score</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:input id="_DC5C08B3-88FC-4E8B-B1C9-004DF55A984F">
+        <dmn:inputExpression id="_A4C3694A-8BA9-45B9-8104-1F22E1314F1F" typeRef="number">
+          <dmn:text>Circulation score</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:input id="_95AB3BF7-39F3-46C8-8FB5-B6C6681831AC">
+        <dmn:inputExpression id="_0351444E-AA89-46C3-BC25-BAC741689D82" typeRef="number">
+          <dmn:text>Consciousness score</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:input id="_1C0F9FA5-83D5-4048-BD5E-73A8D8AA6F76">
+        <dmn:inputExpression id="_01E5B220-2F69-4E3B-BE88-6EE4705C26DD" typeRef="number">
+          <dmn:text>O2 Saturation score</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:input id="_C5173012-F622-473B-90BF-86D239DF49A9">
+        <dmn:inputExpression id="_1D551854-971E-4963-A6CF-F245D445F778" typeRef="number">
+          <dmn:text>Respiration score</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:output id="_9A310350-D1F6-45D7-A867-57D5808EC6AD">
+        <dmn:defaultOutputEntry id="_D3120586-7D19-4640-92BF-3F489E776039">
+          <dmn:text>"Patient shall not exit surgical unit (at least one subscore is equal to zero)"</dmn:text>
+        </dmn:defaultOutputEntry>
+      </dmn:output>
+      <dmn:annotation name="annotation-1"/>
+      <dmn:rule id="_9CD13BD3-F446-4BC4-B9BC-4899C7A2EB7D">
+        <dmn:inputEntry id="_88A6D62A-1185-4AC6-A3B7-543D3EFD713C">
+          <dmn:text>&gt;=8</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_33F9AA65-49AF-49FC-8383-26354A54E791">
+          <dmn:text>&gt;0</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_860279B1-6B03-4BEE-ACDE-B3C2A03290D6">
+          <dmn:text>&gt;0</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_F6CB2F8B-48D2-4D95-8925-507DC2FB7988">
+          <dmn:text>&gt;0</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_C5C5BA14-57A9-4072-A22B-D2C26844239F">
+          <dmn:text>&gt;0</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_F7C1D467-6F74-4AD4-9760-3D4E6268AC33">
+          <dmn:text>&gt;0</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_8FB9A182-720E-43E8-9E53-66C2DC22B41D">
+          <dmn:text>"Patient can exit surgical unit"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_52E9D5C8-7346-4F2D-85D2-097B3CF6A53C">
+        <dmn:inputEntry id="_16C2E038-70B4-4D75-997A-109FB041B47F">
+          <dmn:text>&lt;8</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_653E8FD9-7178-4AD7-AC2A-B3D30F543802">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_818AC095-344D-4678-8968-867BF26C1C9D">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_E5592CB5-33F9-4535-B01E-E40852F12CF5">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_8F211701-44CD-4D2D-88E0-0519D62748C1">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_57DFC2A4-D752-4A1B-9DA9-23F605DE6E2D">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_ADCC3A78-ADE9-4F66-9D44-C376331D6BF9">
+          <dmn:text>"Patient shall not exit surgical unit"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+    </dmn:decisionTable>
+  </dmn:decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="_423FA2AE-E4DD-4C92-A9E3-C33E9EEF139F" name="DRG">
+      <di:extension>
+        <kie:ComponentsWidthsExtension>
+          <kie:ComponentWidths dmnElementRef="_1FB87007-8D27-4458-AEA8-F55FE7E4ABD2">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_759EFEB2-0EBC-4E7C-8C3E-6DE4D3F4CA48">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_2AE4B6A7-F95B-40AA-A7D9-591D3F8C4E7D">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_F2D88973-4776-4D8D-98AF-4A48A18EF8D6">
+            <kie:width>50</kie:width>
+            <kie:width>247</kie:width>
+            <kie:width>118</kie:width>
+            <kie:width>100</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_50BECB58-BE58-4C4C-90BC-BB963EE91FCA">
+            <kie:width>50</kie:width>
+            <kie:width>189</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_86B50A60-85E8-4DA7-8A0B-88A07C96687E">
+            <kie:width>785</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_B4E1ECBF-CB35-4BF9-B030-24ED947E77AD">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>321</kie:width>
+            <kie:width>100</kie:width>
+          </kie:ComponentWidths>
+        </kie:ComponentsWidthsExtension>
+      </di:extension>
+      <dmndi:DMNShape id="dmnshape-drg-_4F206DEE-056A-4486-9F2E-F4C77EDB09ED" dmnElementRef="_4F206DEE-056A-4486-9F2E-F4C77EDB09ED" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="140" y="508" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_422BC0C3-0406-4195-B692-7F1EE86A3763" dmnElementRef="_422BC0C3-0406-4195-B692-7F1EE86A3763" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="301" y="508" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_84C35E7A-11DD-4EA3-99E7-258B7295EAFD" dmnElementRef="_84C35E7A-11DD-4EA3-99E7-258B7295EAFD" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="462" y="508" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_B46F561A-C802-4AA2-8ECA-0FE93F70D2E6" dmnElementRef="_B46F561A-C802-4AA2-8ECA-0FE93F70D2E6" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="618" y="508" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_D9E423E0-D55E-4696-B9A8-2B1C05710167" dmnElementRef="_D9E423E0-D55E-4696-B9A8-2B1C05710167" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="774" y="508" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_B23186D1-DA14-4519-80D4-C382273BF6FE" dmnElementRef="_B23186D1-DA14-4519-80D4-C382273BF6FE" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="141" y="405" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_19B141E8-F645-4DC0-81CA-0030CA4658DC" dmnElementRef="_19B141E8-F645-4DC0-81CA-0030CA4658DC" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="301" y="405" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_69EF4B20-07B1-4B8D-8BEE-951E4FE2375B" dmnElementRef="_69EF4B20-07B1-4B8D-8BEE-951E4FE2375B" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="463" y="405" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_3E9CD01E-57FE-44BE-B307-8E84F09A5E5D" dmnElementRef="_3E9CD01E-57FE-44BE-B307-8E84F09A5E5D" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="618" y="405" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_C636DA55-30D0-4B93-95F6-A1C7B241D41F" dmnElementRef="_C636DA55-30D0-4B93-95F6-A1C7B241D41F" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="775" y="405" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_BF3AAA83-248B-41A4-A2E3-1D7CD7E9B5E3" dmnElementRef="_BF3AAA83-248B-41A4-A2E3-1D7CD7E9B5E3" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="141" y="246" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_C3C93AAF-9CC0-4A17-B0B0-09580095241C" dmnElementRef="_C3C93AAF-9CC0-4A17-B0B0-09580095241C" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="463" y="140" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="dmnedge-drg-_645EA807-77DE-4469-95B8-F01608E13E0F" dmnElementRef="_645EA807-77DE-4469-95B8-F01608E13E0F">
+        <di:waypoint x="240" y="533"/>
+        <di:waypoint x="141" y="430"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_01AB0EE1-C5D9-44C0-BC5C-A605AD2A0AD0" dmnElementRef="_01AB0EE1-C5D9-44C0-BC5C-A605AD2A0AD0">
+        <di:waypoint x="401" y="533"/>
+        <di:waypoint x="301" y="430"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_1D73EE72-DFD8-427F-8183-F54E93608051" dmnElementRef="_1D73EE72-DFD8-427F-8183-F54E93608051">
+        <di:waypoint x="562" y="533"/>
+        <di:waypoint x="463" y="430"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_464F79A8-4929-4BB1-BF2D-929316FD79D8" dmnElementRef="_464F79A8-4929-4BB1-BF2D-929316FD79D8">
+        <di:waypoint x="718" y="533"/>
+        <di:waypoint x="618" y="430"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_3A1BB33E-1F58-4323-8F4A-1A2F2A666289" dmnElementRef="_3A1BB33E-1F58-4323-8F4A-1A2F2A666289">
+        <di:waypoint x="874" y="533"/>
+        <di:waypoint x="775" y="430"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_9BB8ABF3-D8DB-4D93-9BEC-094108151309" dmnElementRef="_9BB8ABF3-D8DB-4D93-9BEC-094108151309">
+        <di:waypoint x="241" y="430"/>
+        <di:waypoint x="141" y="271"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_F5E3668C-BCDE-4B9A-8703-C6936D427D14" dmnElementRef="_F5E3668C-BCDE-4B9A-8703-C6936D427D14">
+        <di:waypoint x="351" y="430"/>
+        <di:waypoint x="191" y="271"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_AA56CAC0-93A1-4D3E-8D8B-8F4F2BE5B59C" dmnElementRef="_AA56CAC0-93A1-4D3E-8D8B-8F4F2BE5B59C">
+        <di:waypoint x="513" y="430"/>
+        <di:waypoint x="191" y="271"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_EAF3CF2F-7C83-4CC6-8E7D-CE48209DEB35" dmnElementRef="_EAF3CF2F-7C83-4CC6-8E7D-CE48209DEB35">
+        <di:waypoint x="668" y="430"/>
+        <di:waypoint x="191" y="271"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_2E1EDDF7-5579-414F-BFE4-0D0FB3648808" dmnElementRef="_2E1EDDF7-5579-414F-BFE4-0D0FB3648808">
+        <di:waypoint x="825" y="430"/>
+        <di:waypoint x="191" y="271"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_9B92A37E-416F-4503-996A-E259049D3B1E" dmnElementRef="_9B92A37E-416F-4503-996A-E259049D3B1E">
+        <di:waypoint x="191" y="271"/>
+        <di:waypoint x="463" y="165"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_8609BB13-3E49-4023-A7A9-96D662E34E87" dmnElementRef="_8609BB13-3E49-4023-A7A9-96D662E34E87">
+        <di:waypoint x="191" y="430"/>
+        <di:waypoint x="513" y="190"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_6BD2C430-027E-466F-ADE9-ED536D0BB3AC" dmnElementRef="_6BD2C430-027E-466F-ADE9-ED536D0BB3AC">
+        <di:waypoint x="351" y="430"/>
+        <di:waypoint x="513" y="190"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_98C34D26-0CE8-4AB0-B830-E7BE24DC7359" dmnElementRef="_98C34D26-0CE8-4AB0-B830-E7BE24DC7359">
+        <di:waypoint x="513" y="430"/>
+        <di:waypoint x="513" y="190"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_1BA86314-9E72-45ED-B11F-4B9651F20370" dmnElementRef="_1BA86314-9E72-45ED-B11F-4B9651F20370">
+        <di:waypoint x="668" y="430"/>
+        <di:waypoint x="513" y="165"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_3A07DF86-C1D8-4D85-B7FC-F5171F3549CA" dmnElementRef="_3A07DF86-C1D8-4D85-B7FC-F5171F3549CA">
+        <di:waypoint x="825" y="430"/>
+        <di:waypoint x="513" y="165"/>
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</dmn:definitions>
