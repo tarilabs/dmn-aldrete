@@ -1,54 +1,9 @@
-```
-mvn archetype:generate \
-    -DarchetypeGroupId=org.kie.kogito \
-    -DarchetypeArtifactId=kogito-quarkus-archetype \
-    -DgroupId=org.acme -DartifactId=sample-kogito \
-    -DarchetypeVersion=1.0.0.Final \
-    -Dversion=1.0-SNAPSHOT --settings settings.xml -Pacme
-```
+An implementation of the [Aldrete score](https://en.wikipedia.org/wiki/Aldrete's_scoring_system) with [DMN](https://drools.org/learn/dmn.html)
 
-# org.kie.kogito.kogito-quarkus-archetype - 1.0.0.Final #
+# References
 
-# Running
-
-- Compile and Run
-
-    ```
-     mvn clean package quarkus:dev
-    ```
-
-- Native Image (requires JAVA_HOME to point to a valid GraalVM)
-
-    ```
-    mvn clean package -Pnative
-    ```
-  
-  native executable (and runnable jar) generated in `target/`
-
-# Test your application
-
-Generated application comes with sample test process that allows you to verify if the application is working as expected. Simply execute following command to try it out
-
-```sh
-curl -d '{}' -H "Content-Type: application/json" -X POST http://localhost:8080/greetings
-```
-
-Once successfully invoked you should see "Hello World" in the console of the running application.
-
-# Developing
-
-Add your business assets resources (process definition, rules, decisions) into src/main/resources.
-
-Add your java classes (data model, utilities, services) into src/main/java.
-
-Then just build the project and run.
-
-
-# Swagger documentation
-
-The exposed service [OpenAPI specification](https://swagger.io/docs/specification) is generated at 
-[/docs/openapi.json](http://localhost:8080/docs/openapi.json).
-
-You can visualize and interact with the generated specification using the embbeded [Swagger UI](http://localhost:8080/swagger-ui) or importing the generated specification file on [Swagger Editor](https://editor.swagger.io).
-
-In addition client application can be easily generated from the swagger definition to interact with this service.
+- [Aldrete score guidelines](http://www.siaarti.it/Ricerca/Raccomandazioni-per-l%E2%80%99area-di-recupero-e-l%E2%80%99assistenza-post-anestesiologica.aspx)
+- [Aldrete score guidelines](http://www.siaarti.it/SiteAssets/Ricerca/Raccomandazioni-per-l%E2%80%99area-di-recupero-e-l%E2%80%99assistenza-post-anestesiologica/linee_guida_file_33.pdf)
+- [Master’s degree thesis “Modeling surgical pediatric processes with BPMN and DMN”](http://hdl.handle.net/10589/150128)
+- [Learn DMN](https://drools.org/learn/dmn.html)
+- [BPM+Health](https://www.bpm-plus.org)
