@@ -10,6 +10,10 @@ The content on this repository is intended only as a methodological exercise to 
 
 - [Aldrete score guidelines](http://www.siaarti.it/Ricerca/Raccomandazioni-per-l%E2%80%99area-di-recupero-e-l%E2%80%99assistenza-post-anestesiologica.aspx)
 - [Aldrete score guidelines](http://www.siaarti.it/SiteAssets/Ricerca/Raccomandazioni-per-l%E2%80%99area-di-recupero-e-l%E2%80%99assistenza-post-anestesiologica/linee_guida_file_33.pdf)
+- A. Bianchi, M. Mortari, C. Pintavalle and G. Pozzi  
+  "Putting BPMN and DMN to Work: a Pediatric Surgery Case Study"  
+  2021 IEEE International Conference on Digital Health (ICDH), 2021, pp. 154-159  
+  doi: [10.1109/ICDH52753.2021.00028](https://doi.org/10.1109/ICDH52753.2021.00028).
 - [Master’s degree thesis “Modeling surgical pediatric processes with BPMN and DMN”](http://hdl.handle.net/10589/150128)
 - [Learn DMN](https://drools.org/learn/dmn.html)
 - [IBM SkillsBuild Reignite webinar](http://ibm.biz/skillsbuildreignite)
